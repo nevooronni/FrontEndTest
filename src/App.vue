@@ -1,31 +1,84 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="#">FIX</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarText">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="#">Events</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Stakeholder</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="#">Users</a>
+          </li>
+        </ul>
+        <span class="navbar-text">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Francis Kimani    
+          </a>
+        </span>
+      </div>
+    </nav>
+  
     <router-view/>
   </div>
 </template>
 
+<script>
+  import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
+</script>
+
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-#nav {
-  padding: 30px;
+.bg-light {
+  background-color: #00A5FB!important;
 }
 
-#nav a {
+.navbar-light .navbar-brand {
+    color: #fff;
+    font-weight: bold;
+}
+
+.navbar-light .navbar-brand:hover {
+    color: #fff;
+    font-weight: bold;
+}
+
+.navbar-light .navbar-nav .nav-link {
+  color: #fff;
+}
+
+.navbar-light .navbar-nav .nav-link:hover {
+  color: #fff;
   font-weight: bold;
-  color: #2c3e50;
 }
 
-#nav a.router-link-exact-active {
-  color: #42b983;
+.navbar-light .navbar-text a {
+    color: #fff;
 }
+
+.navbar-light .navbar-text a:hover {
+    color: #fff;
+    font-weight: bold;
+}
+
+.navbar-nav {
+  margin-left: 40%;
+}
+
+.navbar-light .navbar-nav .nav-link.active {
+  color: #fff;
+}
+
+.nav-item:hover {
+  border-bottom-width: 4px;
+  border-bottom-color: #fff;
+  border-bottom-style: solid;
+  margin-bottom: -15px;
+}
+
 </style>
