@@ -27,8 +27,11 @@ export default new Vuex.Store({
     }
   },
   mutations: {
-    SET_USERS (state, users) {
+    SET_USERS (state, users)  {
       state.users = users
+    },
+    ROW_PAGE (state, size) {
+      state.size = size
     }
   }
 })

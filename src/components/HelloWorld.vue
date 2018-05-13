@@ -60,13 +60,13 @@
                 </li>
               </ul>
             </nav>
-            <form @submit.prevent="rowPage" id="rowform">
+            <form @submit.prevent="rowNumber" id="rowform">
               <label for="inputRow" id="label">Row per page</label>
-              <select class="form-control form-control-sm" id="inputRow" placeholv-model="newPage">
+              <select class="form-control form-control-sm" id="inputRow" v-model="rowSize">
                 <option>10</option>
                 <option>20</option>
               </select>
-              <h6 id="count">From 1 to 10</h6>
+              <h6 id="count">From 1 to {{ rowSize }}</h6>
               <i class="fas fa-arrow-right" id="arrow"></i>
             </form>
             
@@ -79,10 +79,15 @@
 
 <script>
 import fontawesome from '@fortawesome/fontawesome'
-import { mapState, mapGetters } from 'vuex'
+import { mapState, mapGetters, mapMutations } from 'vuex'
 
 export default {
   name: 'HelloWorld',
+  data() {
+    return {
+      rowSize: ''
+    }
+  },
   mounted () {
     this.$store.dispatch('loadUsers')
   },
@@ -94,6 +99,15 @@ export default {
     ...mapGetters([
       'Users'
     ])
+  },
+  methods: {
+    ...mapMutations([
+      'ROW_PAGE'
+    ]),
+    rowNumber: function() {
+      this.ROW_PAGE(this.rowSize)
+      this.rowSize = '';
+    }
   }
 }
 </script>
@@ -168,6 +182,7 @@ export default {
   padding-left: 0px;
   margin-top: 25px;
   margin-left: 47px;
+  margin-bottom: 60px;
 }
 
 .card-body {
