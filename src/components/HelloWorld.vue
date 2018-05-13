@@ -20,6 +20,24 @@
               <input class="form-control mr-sm-2" type="search" placeholder="Search..." aria-label="Search" id="search">
               <button class="btn" type="submit"><i class="fas fa-search" id="search"></i></button>
             </form>
+            <table class="table table-striped">
+              <thead id="tableHead">
+                <tr id="tableRow">
+                  <th class="th">Full name</th>
+                  <th class="th" >Email address</th>
+                  <th class="th">Phone number</th>
+                  <th class="th">Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="user in Users" :key="user.id">
+                  <td id="fullname">{{ user.attributes.first_name }} {{ user.attributes.last_name }}</td>
+                  <td id="email">{{ user.attributes.email }}</td>
+                  <td id="mobile">{{ user.attributes.mobile_number }}</td>
+                  <td id="status">{{ status }}</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
           <div class="card-footer text-muted" id="cardFooter">
             <nav aria-label="Page navigation example">
@@ -61,16 +79,61 @@
 
 <script>
 import fontawesome from '@fortawesome/fontawesome'
+import { mapState, mapGetters } from 'vuex'
 
-import { mapState, mapMutations, mapActions } from 'vuex'
 export default {
   name: 'HelloWorld',
+  mounted () {
+    this.$store.dispatch('loadUsers')
+  },
+  computed: {
+    ...mapState([
+      'users',
+      'status'
+    ]),
+    ...mapGetters([
+      'Users'
+    ])
+  }
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 
+.table {
+  margin-top: 90px;
+  margin-left: 0px;
+  margin-right: 0px;
+  width: 1442px;
+}
+
+.th {
+  text-align: left;
+  color: grey;
+  border-top-style: none;
+  border-top-color: transparent;  
+}
+
+#fullname {
+  color: #09B6FB;
+  text-align: left;
+}
+
+#email {
+  color: #848A90;
+  text-align: left;
+}
+
+#mobile {
+  color: #848A90;
+  text-align: left;
+}
+
+#status {
+  color: #54C63C;
+  text-align: left;
+}
 #containerFluid {
   background-color: #F7F7F7;
 }
@@ -109,6 +172,7 @@ export default {
 
 .card-body {
   padding-top: 25px;
+  padding-left: 0px;
 }
 
 #cardFooter {
