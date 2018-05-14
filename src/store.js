@@ -9,8 +9,8 @@ Vue.use(VueAxios, axios)
 export default new Vuex.Store({
   state: {
     users: [],
-    number: 1,
-    size: 10,
+    per_page: 10,
+    page_number: 3,
     status: 'active'
   },
   getters: {
@@ -19,19 +19,23 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    loadUsers ({ commit }, number, size) {
-      axios.get('https://dry-harbor-88607.herokuapp.com/api/users?page[number]=${number}&page[size]=${size}').then(r => r.data).then(users => {
+    loadUsers ({ commit }, state, per_page, page_number) {
+      axios.get('https://dry-harbor-88607.herokuapp.com/api/users?${page_number}&${per_page}').then(r => r.data).then(users => {
         commit('SET_USERS', users)
         console.log(users)
       })
+      .catch((error) => {
+        console.log*(error)
+      })
     }
+     
   },
   mutations: {
     SET_USERS (state, users)  {
       state.users = users
     },
-    ROW_PAGE (state, size) {
-      state.size = size
+    ADD_SIZE (state, newSize) {
+      state.sizes.push(newSize)
     }
   }
 })

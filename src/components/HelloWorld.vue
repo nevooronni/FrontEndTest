@@ -7,7 +7,14 @@
             <h3 id="users">Users</h3>
           </div>
           <div class="col-md-6">
-            <button class="btn" id="button">ADD USER</button>
+      
+            <b-btn v-b-modal.modal1 id="button">ADD USER</b-btn>
+
+            <!-- Modal Component -->
+            <b-modal id="modal1" title="">
+              <p class="my-4">Hello from modal!</p>
+            </b-modal>
+
           </div>
         </div>
       </div>
@@ -27,17 +34,29 @@
                   <th class="th" >Email address</th>
                   <th class="th">Phone number</th>
                   <th class="th">Status</th>
+                  <th class="th">Edit</th>
+                  <th class="th">Delete</th>
                 </tr>
               </thead>
               <tbody>
+                
                 <tr v-for="user in Users" :key="user.id">
-                  <td id="fullname">{{ user.attributes.first_name }} {{ user.attributes.last_name }}</td>
-                  <td id="email">{{ user.attributes.email }}</td>
-                  <td id="mobile">{{ user.attributes.mobile_number }}</td>
-                  <td id="status">{{ status }}</td>
+                 
+                    <td id="fullname">{{ user.attributes.first_name }} {{ user.attributes.last_name }}</td>
+                    <td id="email">{{ user.attributes.email }}</td>
+                    <td id="mobile">{{ user.attributes.mobile_number }}</td>
+                    <td id="status">{{ status }}</td>
+                    <td id="Edit"><i v-b-modal.modal="'editModal'" class="fas fa-arrow-right"></i></td>
+                    <td id="Delete"><i class="fas fa-arrow-right"></i></td>
                 </tr>
+                
               </tbody>
+              <!-- Modal Component -->
+              <b-modal id="editModal" title="">
+                <p class="my-4">Edit Modal!</p>
+              </b-modal>
             </table>
+
           </div>
           <div class="card-footer text-muted" id="cardFooter">
             <nav aria-label="Page navigation example">
@@ -60,13 +79,14 @@
                 </li>
               </ul>
             </nav>
-            <form @submit.prevent="rowNumber" id="rowform">
+            <form  @submit="addSize()" id="rowform">
               <label for="inputRow" id="label">Row per page</label>
-              <select class="form-control form-control-sm" id="inputRow" v-model="rowSize">
+              <select  class="form-control form-control-sm" id="inputRow" v-model="newSize">
                 <option>10</option>
                 <option>20</option>
               </select>
-              <h6 id="count">From 1 to {{ rowSize }}</h6>
+              <h6 id="count" v-if="newSize">From 1 to {{ newSize }}</h6>
+              <h6 id="count" v-else>All</h6>
               <i class="fas fa-arrow-right" id="arrow"></i>
             </form>
             
@@ -74,27 +94,43 @@
         </div>
       </div>
     </div>
+    <paginate name="usersdata" :list="langs" :per="newSize">
+      <li v-for="lang in paginated('usersdata')">{{ lang }}</li>
+    </paginate>
+    <paginate-links for="usersdata"></paginate-links>
   </div>
 </template>
 
 <script>
+import Vue from 'vue'
+import Router from 'vue-router'
 import fontawesome from '@fortawesome/fontawesome'
 import { mapState, mapGetters, mapMutations } from 'vuex'
+import VuePaginate from 'vue-paginate'
+
+Vue.use(VuePaginate)
 
 export default {
   name: 'HelloWorld',
   data() {
     return {
-      rowSize: ''
+      show: false,
+      newSize: '',
+      paginate: ['usersdata'],
+      langs: ['JavaScript', 'PHP', 'HTML', 'CSS', 'Ruby', 'Python', 'Erlang'],
+      
     }
   },
-  mounted () {
+  components: {
+    
+  },
+  mounted() {
     this.$store.dispatch('loadUsers')
   },
   computed: {
     ...mapState([
       'users',
-      'status'
+      'status',
     ]),
     ...mapGetters([
       'Users'
@@ -102,11 +138,11 @@ export default {
   },
   methods: {
     ...mapMutations([
-      'ROW_PAGE'
+      'ADD_SIZE'
     ]),
-    rowNumber: function() {
-      this.ROW_PAGE(this.rowSize)
-      this.rowSize = '';
+    addSize () {
+      this.ADD_SIZE(this.newSize)
+      this.newSize = ''
     }
   }
 }
@@ -114,6 +150,8 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+@import "https://cdn.jsdelivr.net/npm/animate.css@3.5.1";
+
 
 .table {
   margin-top: 90px;
@@ -160,14 +198,6 @@ export default {
 
 #users {
   font-weight: bold;
-}
-
-#button {
-  float: right;
-  color: #fff;
-  background-color: #0094FF;
-  border-radius: 3px;
-  width: 170px;
 }
 
 #form {
@@ -259,5 +289,17 @@ export default {
     background-color: #0094FF;
     color: #fff;
 }
+
+#button {
+  float: right;
+  color: #fff;
+  background-color: #0094FF;
+  border-radius: 3px;
+  width: 170px;
+}
+
+.modal-header {
+    border-bottom: none;
+  }
 
 </style>

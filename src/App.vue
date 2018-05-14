@@ -31,10 +31,16 @@
 </template>
 
 <script>
+  import Vue from 'vue'
+  import BootstrapVue from 'bootstrap-vue'
   import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
+
+  Vue.use(BootstrapVue)
+ 
 </script>
 
 <style>
+
 .bg-light {
   background-color: #00A5FB!important;
 }
