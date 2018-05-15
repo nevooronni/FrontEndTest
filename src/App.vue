@@ -20,7 +20,7 @@
         <span class="navbar-text">
           
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-           Francis Kimani    
+            <font-awesome-icon :icon="bell" id="color"/>Francis Kimani    
           </a>
         </span>
       </div>
@@ -40,6 +40,17 @@
   
 
   Vue.use(BootstrapVue)
+
+  export default {
+    computed: {
+      bell () {
+        return faBell
+      }
+    },
+    components: {
+      FontAwesomeIcon
+    }
+  }
  
 </script>
 

@@ -44,16 +44,28 @@
                     <td id="email">{{ user.attributes.email }}</td>
                     <td id="mobile">{{ user.attributes.mobile_number }}</td>
                     <td id="status">{{ status }}</td>
-                    <td class="icon"><font-awesome-icon :icon="eye" /></td>
+                    <td class="icon"><font-awesome-icon :icon="eye" v-b-modal.modal="'readModal'" /></td>
                     <td class="icon"><font-awesome-icon :icon="edit" v-b-modal.modal="'editModal'" /></td>
-                    <td class="icon"><font-awesome-icon :icon="del" /></td>
+                    <td class="icon"><font-awesome-icon :icon="del" v-b-modal.modal="'deleteModal'" /></td>
                 </tr>
                 
               </tbody>
-              <!-- Modal Component -->
+              
+              <!--read Componenent-->
+              <b-modal id="readModal" title="">
+                <p class="my-4">read Modal!</p>
+              </b-modal>
+
+              <!-- Edit Component -->
               <b-modal id="editModal" title="">
                 <p class="my-4">Edit Modal!</p>
               </b-modal>
+
+              <!--Delete Componenent-->
+              <b-modal id="deleteModal" title="">
+                <p class="my-4">delete Modal!</p>
+              </b-modal>
+              
             </table>
 
           </div>
