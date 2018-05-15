@@ -18,9 +18,9 @@
           </li>
         </ul>
         <span class="navbar-text">
-          
+         
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <font-awesome-icon :icon="bell" id="color"/>Francis Kimani    
+            <font-awesome-icon :icon="bell" id="color"/> <img src="./assets/hannibal.jpg" class="img-responsive" id="profilePic">Francsis Kimani    
           </a>
         </span>
       </div>
@@ -58,8 +58,9 @@
 
 #color {
   color: #fff;
-  margin-right: 10px;
-  font-size: 20px;
+  margin-right: 15px;
+  font-size: 30px;
+  margin-bottom: -7px;
 }
 
 .bg-light {
@@ -106,7 +107,15 @@
   border-bottom-width: 4px;
   border-bottom-color: #fff;
   border-bottom-style: solid;
-  margin-bottom: -15px;
+  margin-bottom: -20px;
+}
+
+#profilePic {
+  height: 35px;
+  width: 45px;
+  border-radius: 3px;
+  margin-right: 8px;
+  margin-left: 25px;
 }
 
 </style>

@@ -105,8 +105,7 @@
         </div>
       </div>
     </div>
-    
-    <paginate-links for="usersdata"></paginate-links>
+
   </div>
 </template>
 
@@ -325,13 +324,11 @@ export default {
   }
 
 .icon {
-  tex#eye {
   text-align: left;
 }
 
 #edit {
   text-align: left;
-}t-align: left;
 }
 
 </style>
