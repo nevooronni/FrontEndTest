@@ -34,8 +34,6 @@
                   <th class="th" >Email address</th>
                   <th class="th">Phone number</th>
                   <th class="th">Status</th>
-                  <th class="th">Edit</th>
-                  <th class="th">Delete</th>
                 </tr>
               </thead>
               <tbody>
@@ -46,9 +44,9 @@
                     <td id="email">{{ user.attributes.email }}</td>
                     <td id="mobile">{{ user.attributes.mobile_number }}</td>
                     <td id="status">{{ status }}</td>
-                    <td id="eye"><font-awesome-icon :icon="eye" /></td>
-                    <td id="edit"><font-awesome-icon :icon="edit" v-b-modal.modal="'editModal'" /></td>
-                    <td id="Delete"></td>
+                    <td class="icon"><font-awesome-icon :icon="eye" /></td>
+                    <td class="icon"><font-awesome-icon :icon="edit" v-b-modal.modal="'editModal'" /></td>
+                    <td class="icon"><font-awesome-icon :icon="del" /></td>
                 </tr>
                 
               </tbody>
@@ -109,6 +107,7 @@ import VuePaginate from 'vue-paginate'
 import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
 import { faEye } from '@fortawesome/fontawesome-free-solid'
 import { faPencilAlt } from '@fortawesome/fontawesome-free-solid'
+import { faTrashAlt } from '@fortawesome/fontawesome-free-solid'
 
 Vue.use(VuePaginate)
 
@@ -142,6 +141,9 @@ export default {
     },
     edit () {
       return faPencilAlt
+    },
+    del () {
+      return faTrashAlt
     }
   },
   methods: {
@@ -310,12 +312,14 @@ export default {
     border-bottom: none;
   }
 
-#eye {
+.icon {
+  tex#eye {
   text-align: left;
 }
 
 #edit {
   text-align: left;
+}t-align: left;
 }
 
 </style>
