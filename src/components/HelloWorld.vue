@@ -25,7 +25,7 @@
           <div class="card-body">
             <form class="form-inline my-2 my-lg-0" id="form">
               <input class="form-control mr-sm-2" type="search" placeholder="Search..." aria-label="Search" id="search">
-              <button class="btn" type="submit"><i class="fas fa-search" id="search"></i></button>
+              <font-awesome-icon :icon="search" id="searchbutton"/>
             </form>
             <table class="table table-striped">
               <thead id="tableHead">
@@ -119,6 +119,8 @@ import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
 import { faEye } from '@fortawesome/fontawesome-free-solid'
 import { faPencilAlt } from '@fortawesome/fontawesome-free-solid'
 import { faTrashAlt } from '@fortawesome/fontawesome-free-solid'
+import { faSearch } from '@fortawesome/fontawesome-free-solid'
+
 
 Vue.use(VuePaginate)
 
@@ -155,6 +157,9 @@ export default {
     },
     del () {
       return faTrashAlt
+    },
+    search () {
+      return faSearch
     }
   },
   methods: {
@@ -329,6 +334,11 @@ export default {
 
 #edit {
   text-align: left;
+}
+
+#searchbutton {
+  color: grey;
+  margin-left: -26px;
 }
 
 </style>
