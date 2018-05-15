@@ -18,8 +18,9 @@
           </li>
         </ul>
         <span class="navbar-text">
+          
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Francis Kimani    
+           Francis Kimani    
           </a>
         </span>
       </div>
@@ -34,12 +35,21 @@
   import Vue from 'vue'
   import BootstrapVue from 'bootstrap-vue'
   import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
+  import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
+  import { faBell } from '@fortawesome/fontawesome-free-solid'
+  
 
   Vue.use(BootstrapVue)
  
 </script>
 
 <style>
+
+#color {
+  color: #fff;
+  margin-right: 10px;
+  font-size: 20px;
+}
 
 .bg-light {
   background-color: #00A5FB!important;

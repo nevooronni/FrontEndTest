@@ -46,8 +46,9 @@
                     <td id="email">{{ user.attributes.email }}</td>
                     <td id="mobile">{{ user.attributes.mobile_number }}</td>
                     <td id="status">{{ status }}</td>
-                    <td id="Edit"><i v-b-modal.modal="'editModal'" class="fas fa-arrow-right"></i></td>
-                    <td id="Delete"><i class="fas fa-arrow-right"></i></td>
+                    <td id="eye"><font-awesome-icon :icon="eye" /></td>
+                    <td id="edit"><font-awesome-icon :icon="edit" v-b-modal.modal="'editModal'" /></td>
+                    <td id="Delete"></td>
                 </tr>
                 
               </tbody>
@@ -94,9 +95,7 @@
         </div>
       </div>
     </div>
-    <paginate name="usersdata" :list="langs" :per="newSize">
-      <li v-for="lang in paginated('usersdata')">{{ lang }}</li>
-    </paginate>
+    
     <paginate-links for="usersdata"></paginate-links>
   </div>
 </template>
@@ -107,6 +106,9 @@ import Router from 'vue-router'
 import fontawesome from '@fortawesome/fontawesome'
 import { mapState, mapGetters, mapMutations } from 'vuex'
 import VuePaginate from 'vue-paginate'
+import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
+import { faEye } from '@fortawesome/fontawesome-free-solid'
+import { faPencilAlt } from '@fortawesome/fontawesome-free-solid'
 
 Vue.use(VuePaginate)
 
@@ -122,7 +124,7 @@ export default {
     }
   },
   components: {
-    
+    FontAwesomeIcon  
   },
   mounted() {
     this.$store.dispatch('loadUsers')
@@ -134,7 +136,13 @@ export default {
     ]),
     ...mapGetters([
       'Users'
-    ])
+    ]),
+    eye () {
+      return faEye
+    },
+    edit () {
+      return faPencilAlt
+    }
   },
   methods: {
     ...mapMutations([
@@ -301,5 +309,13 @@ export default {
 .modal-header {
     border-bottom: none;
   }
+
+#eye {
+  text-align: left;
+}
+
+#edit {
+  text-align: left;
+}
 
 </style>
