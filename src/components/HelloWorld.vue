@@ -39,8 +39,8 @@
                     <td id="email">{{ user.attributes.email }}</td>
                     <td id="mobile">{{ user.attributes.mobile_number }}</td>
                     <td id="status">{{ status }}</td>
-                    <td class="icon"><font-awesome-icon :icon="eye" @click="showModal"/></td>
-                    <td class="icon"><font-awesome-icon :icon="edit"/></td>
+                    <td class="icon"><font-awesome-icon :icon="eye"  @click="showModal2"/></td>
+                    <td class="icon"><font-awesome-icon :icon="edit" @click="showModal3"/></td>
                     <td class="icon"><font-awesome-icon :icon="del"/></td>
                 </tr>
                 
@@ -49,7 +49,9 @@
             </table>
             
             <!--view user modal-->
-            <ViewUser v-show="isModalVisible" @close="closeModal"/>
+            <ViewUser v-show="isModalVisible2" @close="closeModal2"/>
+            <!--edit user modal-->
+            <EditUser v-show="isModalVisible3" @close="closeModal3"/>
           </div>
           <div class="card-footer text-muted" id="cardFooter">
             <nav aria-label="Page navigation example">
@@ -105,6 +107,7 @@ import { faTrashAlt } from '@fortawesome/fontawesome-free-solid'
 import { faSearch } from '@fortawesome/fontawesome-free-solid'
 import AddUser from '@/components/AddUser'
 import ViewUser from '@/components/ViewUser'
+import EditUser from '@/components/EditUser'
 
 Vue.use(VuePaginate)
 
@@ -113,11 +116,14 @@ export default {
   components: {
     FontAwesomeIcon,
     AddUser,
-    ViewUser
+    ViewUser,
+    EditUser
   },
   data() {
     return {
       isModalVisible: false,
+      isModalVisible2: false,
+      isModalVisible3: false,
       newSize: '',
       paginate: ['usersdata'],
       langs: ['JavaScript', 'PHP', 'HTML', 'CSS', 'Ruby', 'Python', 'Erlang'] 
@@ -160,6 +166,18 @@ export default {
     },
     closeModal () {
       this.isModalVisible = false
+    },
+    showModal2 () {
+      this.isModalVisible2 = true
+    },
+    closeModal2 () {
+      this.isModalVisible2 = false
+    },
+    showModal3 () {
+      this.isModalVisible3 = true
+    },
+    closeModal3 () {
+      this.isModalVisible3 = false
     }
   }
 }
