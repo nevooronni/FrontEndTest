@@ -9,7 +9,7 @@
           <div class="col-md-6">
       
             <b-btn id="button" class="btn"  @click="showModal">ADD USER</b-btn>
-             <AddUser v-show="isModalVisible" @close="closeModal"/>
+            <AddUser v-show="isModalVisible" @close="closeModal"/>
           </div>
         </div>
       </div>
@@ -39,7 +39,7 @@
                     <td id="email">{{ user.attributes.email }}</td>
                     <td id="mobile">{{ user.attributes.mobile_number }}</td>
                     <td id="status">{{ status }}</td>
-                    <td class="icon"><font-awesome-icon :icon="eye"/></td>
+                    <td class="icon"><font-awesome-icon :icon="eye" @click="showModal"/></td>
                     <td class="icon"><font-awesome-icon :icon="edit"/></td>
                     <td class="icon"><font-awesome-icon :icon="del"/></td>
                 </tr>
@@ -47,7 +47,9 @@
               </tbody>
               
             </table>
-
+            
+            <!--view user modal-->
+            <ViewUser v-show="isModalVisible" @close="closeModal"/>
           </div>
           <div class="card-footer text-muted" id="cardFooter">
             <nav aria-label="Page navigation example">
@@ -102,6 +104,7 @@ import { faPencilAlt } from '@fortawesome/fontawesome-free-solid'
 import { faTrashAlt } from '@fortawesome/fontawesome-free-solid'
 import { faSearch } from '@fortawesome/fontawesome-free-solid'
 import AddUser from '@/components/AddUser'
+import ViewUser from '@/components/ViewUser'
 
 Vue.use(VuePaginate)
 
@@ -109,7 +112,8 @@ export default {
   name: 'HelloWorld',
   components: {
     FontAwesomeIcon,
-    AddUser
+    AddUser,
+    ViewUser
   },
   data() {
     return {
@@ -317,6 +321,10 @@ export default {
 
 .icon {
   text-align: left;
+}
+
+.icon:hover {
+  cursor: pointer;
 }
 
 #edit {
