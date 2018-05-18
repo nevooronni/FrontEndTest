@@ -6,45 +6,31 @@
         aria-labelledby="modalTitle"
         aria-describedby="modalDescription"
       >
-        <header
-          class="modal-header"
-          id="modalTitle"
-        >
-          <slot name="header">
-            This is the default tile!
-
-            <button
-              type="button"
-              class="btn-close"
-              @click="close"
-              aria-label="Close modal"
-            >
-              x
-            </button>
-          </slot>
-        </header>
         <section
           class="modal-body"
           id="modalDescription"
         >
           <slot name="body">
-            I'm the default body!
+
+            
+            <form @submit.prevent="addSkill">
+              <span class="form-group">
+                <input type="text" placeholder="First Name*"  name="firstname" class="enter input">
+                <input type="text" placeholder="Last Name*" name="lastname" class="enter">
+              </span>
+              <span class="form-group">
+                <input type="text" placeholder="Phone Number*" name="phonenumber" class="enter input">
+                <input type="text" placeholder="Email Address*" name="emailaddress" class="enter">
+              </span>
+              <span class="form-group2">
+                <p class="text-left">*Indicates a required field</p>
+                <button class="btn" type="submit" id="save">SAVE</button>
+                <button type="button" class="btn-green" @click="close" aria-label="Close modal" id="cancel">CANCEL</button>
+              </span>
+            </form>
+            
           </slot>
         </section>
-        <footer class="modal-footer">
-          <slot name="footer">
-            I'm the default footer!
-
-            <button
-              type="button"
-              class="btn-green"
-              @click="close"
-              aria-label="Close modal"
-            >
-              Close me!
-            </button>
-          </slot>
-        </footer>
       </div>
     </div>
   </transition>
@@ -62,6 +48,7 @@ export default {
 </script>
 
 <style scoped>
+@import "https://cdn.jsdelivr.net/npm/animate.css@3.5.1";
 
 .modal-backdrop {
     position: fixed;
@@ -81,8 +68,8 @@ export default {
     overflow-x: auto;
     display: flex;
     flex-direction: column;
-    width: 40%;
-    height: 40%;
+    width: 45%;
+    height: 60%;
     margin-top: 7%;
     margin-left: 30%;
   }
@@ -106,7 +93,7 @@ export default {
 
   .modal-body {
     position: relative;
-    padding: 20px 10px;
+    padding: 90px 79px;
   }
 
   .btn-close {
@@ -117,6 +104,7 @@ export default {
     font-weight: bold;
     color: #4AAE9B;
     background: transparent;
+    float: right;
   }
 
   .btn-green {
@@ -134,5 +122,67 @@ export default {
   .modal-fade-enter-active,
   .modal-fade-leave-active {
     transition: opacity .5s ease
+  }
+
+  .form-group {
+    display: block;
+    margin-bottom: 50px;
+
+  }
+
+  .form-group2 {
+    display: block;
+    margin-top: 185px;
+  }
+
+  .enter {
+    color: grey;
+    font-weight: bold;
+    background-color: transparent;
+    border-top-style: none;
+    border-left-style: none;
+    border-right-style: none;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    border-bottom-color: grey;
+    border-radius: 0px;
+    width: 210px;
+  }
+
+  .input {
+    margin-right: 55px;
+  }
+
+  .text-left {
+    color: grey;
+    float: left;
+  }
+
+  #save {
+    float: right;
+    background-color:#0094FF;
+    color: #fff;
+    border-radius: 4px;
+  }
+
+  #save:hover {
+    background-color: #fff;
+    color: #0094FF;
+    border-style: solid;
+    border-color: #0094FF;
+  }
+
+  #cancel {
+    float: right;
+    background-color: transparent;
+    color: grey;
+    border-style: none;
+    height: 38px;
+    margin-right: 5px;
+  }
+
+  #cancel:hover {
+    background-color: #0094FF;
+    color: #fff;
   }
 </style>
