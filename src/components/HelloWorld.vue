@@ -41,7 +41,7 @@
                     <td id="status">{{ status }}</td>
                     <td class="icon"><font-awesome-icon :icon="eye"  @click="showModal2"/></td>
                     <td class="icon"><font-awesome-icon :icon="edit" @click="showModal3"/></td>
-                    <td class="icon"><font-awesome-icon :icon="del"/></td>
+                    <td class="icon"><font-awesome-icon :icon="del" @click="showModal4"/></td>
                 </tr>
                 
               </tbody>
@@ -50,8 +50,12 @@
             
             <!--view user modal-->
             <ViewUser v-show="isModalVisible2" @close="closeModal2"/>
+
             <!--edit user modal-->
             <EditUser v-show="isModalVisible3" @close="closeModal3"/>
+
+            <!--delete user modal-->
+            <DelUser v-show="isModalVisible4" @close="closeModal4"/>
           </div>
           <div class="card-footer text-muted" id="cardFooter">
             <nav aria-label="Page navigation example">
@@ -108,6 +112,7 @@ import { faSearch } from '@fortawesome/fontawesome-free-solid'
 import AddUser from '@/components/AddUser'
 import ViewUser from '@/components/ViewUser'
 import EditUser from '@/components/EditUser'
+import DelUser from '@/components/DelUser'
 
 Vue.use(VuePaginate)
 
@@ -117,13 +122,15 @@ export default {
     FontAwesomeIcon,
     AddUser,
     ViewUser,
-    EditUser
+    EditUser,
+    DelUser
   },
   data() {
     return {
       isModalVisible: false,
       isModalVisible2: false,
       isModalVisible3: false,
+      isModalVisible4: false,
       newSize: '',
       paginate: ['usersdata'],
       langs: ['JavaScript', 'PHP', 'HTML', 'CSS', 'Ruby', 'Python', 'Erlang'] 
@@ -178,6 +185,12 @@ export default {
     },
     closeModal3 () {
       this.isModalVisible3 = false
+    },
+    showModal4 () {
+      this.isModalVisible4 = true
+    },
+    closeModal4 () {
+      this.isModalVisible4 = false
     }
   }
 }

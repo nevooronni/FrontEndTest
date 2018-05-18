@@ -13,12 +13,14 @@
           <slot name="body">
 
               <span class="form-group">
-                <h4 class="enter">First Name: </h4>
-                <h4 class="enter">Last Name:</h4>
-                 <h4 class="enter">Phone Number:</h4>
-                <h4 class="enter">Email Address:</h4> 
+                <h4 class="enter">Are you sure you want to delete</h4>
+              </span>
+              <span class="form-group">
+                <h4 class="enter2">Neville</h4>
+                <h4 class="enter2">Oronni ?</h4>
               </span>
               <span class="form-group2">
+                <button class="btn" type="submit" id="save">YES</button>
                 <button type="button" class="btn-green" @click="close" aria-label="Close modal" id="cancel">CANCEL</button>
               </span>
             
@@ -62,7 +64,7 @@ export default {
     display: flex;
     flex-direction: column;
     width: 45%;
-    height: 55%;
+    height: 50%;
     margin-top: 7%;
     margin-left: 30%;
   }
@@ -119,13 +121,13 @@ export default {
 
   .form-group {
     display: block;
-    margin-bottom: 0px;
+    margin-bottom: 20px;
 
   }
 
   .form-group2 {
     display: block;
-    margin-top: 89px;
+    margin-top: 145px;
   }
 
   .enter {
@@ -133,7 +135,17 @@ export default {
     font-weight: bold;
     background-color: transparent;
     text-align: left;
-    margin-bottom: 20px;
+    display: inline;
+    color: red;
+  }
+
+  .enter2 {
+    color: #0094FF;
+    font-weight: bold;
+    background-color: transparent;
+    text-align: left;
+    display: inline; 
+    margin-right: 10px;  
   }
 
   .input {
@@ -146,10 +158,11 @@ export default {
   }
 
   #save {
-    float: right;
     background-color:#0094FF;
     color: #fff;
     border-radius: 4px;
+    height: 48px;
+    width: 90px;
   }
 
   #save:hover {
@@ -160,19 +173,17 @@ export default {
   }
 
   #cancel {
-    background-color: #0094FF;
-    color: #fff;
-    border-style: none;
+    background-color: transparent;
+    color: grey;
     height: 48px;
-    margin-right: 0px;
+    margin-left: 7px;
+    border-style: none;
+    border-radius: 4px;
   }
 
   #cancel:hover {
-    background-color: transparent;
-    color: #0094FF;
+    background-color: #0094FF;
+    color: #fff;
     cursor: pointer;
-    border-style: solid;
-    border-width: 2px;
-    border-color: #0094FF;
   }
 </style>
