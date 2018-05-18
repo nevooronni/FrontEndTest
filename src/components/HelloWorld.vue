@@ -8,13 +8,8 @@
           </div>
           <div class="col-md-6">
       
-            <b-btn v-b-modal.modal1 id="button">ADD USER</b-btn>
-
-            <!-- Modal Component -->
-            <b-modal id="modal1" title="">
-              <p class="my-4">Hello from modal!</p>
-            </b-modal>
-
+            <b-btn id="button" class="btn"  @click="showModal">ADD USER</b-btn>
+             <AddUser v-show="isModalVisible" @close="closeModal"/>
           </div>
         </div>
       </div>
@@ -44,27 +39,12 @@
                     <td id="email">{{ user.attributes.email }}</td>
                     <td id="mobile">{{ user.attributes.mobile_number }}</td>
                     <td id="status">{{ status }}</td>
-                    <td class="icon"><font-awesome-icon :icon="eye" v-b-modal.modal="'readModal'" /></td>
-                    <td class="icon"><font-awesome-icon :icon="edit" v-b-modal.modal="'editModal'" /></td>
-                    <td class="icon"><font-awesome-icon :icon="del" v-b-modal.modal="'deleteModal'" /></td>
+                    <td class="icon"><font-awesome-icon :icon="eye"/></td>
+                    <td class="icon"><font-awesome-icon :icon="edit"/></td>
+                    <td class="icon"><font-awesome-icon :icon="del"/></td>
                 </tr>
                 
               </tbody>
-              
-              <!--read Componenent-->
-              <b-modal id="readModal" title="">
-                <p class="my-4">read Modal!</p>
-              </b-modal>
-
-              <!-- Edit Component -->
-              <b-modal id="editModal" title="">
-                <p class="my-4">Edit Modal!</p>
-              </b-modal>
-
-              <!--Delete Componenent-->
-              <b-modal id="deleteModal" title="">
-                <p class="my-4">delete Modal!</p>
-              </b-modal>
               
             </table>
 
@@ -105,7 +85,8 @@
         </div>
       </div>
     </div>
-
+    
+      
   </div>
 </template>
 
@@ -120,23 +101,23 @@ import { faEye } from '@fortawesome/fontawesome-free-solid'
 import { faPencilAlt } from '@fortawesome/fontawesome-free-solid'
 import { faTrashAlt } from '@fortawesome/fontawesome-free-solid'
 import { faSearch } from '@fortawesome/fontawesome-free-solid'
-
+import AddUser from '@/components/AddUser'
 
 Vue.use(VuePaginate)
 
 export default {
   name: 'HelloWorld',
+  components: {
+    FontAwesomeIcon,
+    AddUser
+  },
   data() {
     return {
-      show: false,
+      isModalVisible: false,
       newSize: '',
       paginate: ['usersdata'],
-      langs: ['JavaScript', 'PHP', 'HTML', 'CSS', 'Ruby', 'Python', 'Erlang'],
-      
+      langs: ['JavaScript', 'PHP', 'HTML', 'CSS', 'Ruby', 'Python', 'Erlang'] 
     }
-  },
-  components: {
-    FontAwesomeIcon  
   },
   mounted() {
     this.$store.dispatch('loadUsers')
@@ -169,6 +150,12 @@ export default {
     addSize () {
       this.ADD_SIZE(this.newSize)
       this.newSize = ''
+    },
+    showModal () {
+      this.isModalVisible = true
+    },
+    closeModal () {
+      this.isModalVisible = false
     }
   }
 }

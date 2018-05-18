@@ -12,7 +12,8 @@ export default new Vuex.Store({
     users: [],
     per_page: 10,
     page_number: 3,
-    status: 'active'
+    status: 'active',
+    name: "Kellen Larson"
   },
   getters: {
     Users: state => {
@@ -20,8 +21,8 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    loadUsers ({ commit }, state, per_page, page_number) {
-      axios.get('https://dry-harbor-88607.herokuapp.com/api/users?${page_number}&${per_page}').then(r => r.data).then(users => {
+    loadUsers ({ commit }, state, name) {
+      axios.get('https://dry-harbor-88607.herokuapp.com/api/users?page[number]=${num}&page[size]=${num}').then(r => r.data).then(users=> {
         commit('SET_USERS', users)
         console.log(users)
       })

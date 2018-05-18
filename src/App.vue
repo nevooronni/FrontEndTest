@@ -38,6 +38,7 @@
   import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
   import { faBell } from '@fortawesome/fontawesome-free-solid'
   
+  
 
   Vue.use(BootstrapVue)
 
@@ -104,18 +105,19 @@
 }
 
 .nav-item:hover {
-  border-bottom-width: 4px;
+  border-bottom-width: 5px;
   border-bottom-color: #fff;
   border-bottom-style: solid;
-  margin-bottom: -20px;
+  margin-bottom: -23px;
 }
 
 #profilePic {
-  height: 35px;
+  height: 40px;
   width: 45px;
   border-radius: 3px;
   margin-right: 8px;
   margin-left: 25px;
+  margin-bottom: 0px;
 }
 
 </style>
