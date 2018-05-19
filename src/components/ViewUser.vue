@@ -13,9 +13,9 @@
           <slot name="body">
 
               <span class="form-group">
-                <h4 class="enter">First Name: </h4>
+                <h4 class="enter" >First Name: {{ user.attributes.first_name }}</h4>
                 <h4 class="enter">Last Name:</h4>
-                 <h4 class="enter">Phone Number:</h4>
+                <h4 class="enter">Phone Number:</h4>
                 <h4 class="enter">Email Address:</h4> 
               </span>
               <span class="form-group2">
@@ -30,12 +30,21 @@
 </template>
 
 <script>
+import { mapState, mapGetters, mapMutations } from 'vuex'
 export default {
     name: 'Modal',
     methods: {
         close() {
             this.$emit('close')
         }
+    },
+    computed: {
+      ...mapState([
+        'users'
+      ]),
+      ...mapGetters([
+        'Users'
+      ])
     }
 }
 </script>

@@ -40,6 +40,8 @@
                     <td id="mobile">{{ user.attributes.mobile_number }}</td>
                     <td id="status">{{ status }}</td>
                     <td class="icon"><font-awesome-icon :icon="eye"  @click="showModal2"/></td>
+                    <!--view user modal-->
+                    <ViewUser v-show="isModalVisible2" @close="closeModal2"/>     
                     <td class="icon"><font-awesome-icon :icon="edit" @click="showModal3"/></td>
                     <td class="icon"><font-awesome-icon :icon="del" @click="showModal4"/></td>
                 </tr>
@@ -48,8 +50,7 @@
               
             </table>
             
-            <!--view user modal-->
-            <ViewUser v-show="isModalVisible2" @close="closeModal2"/>
+            
 
             <!--edit user modal-->
             <EditUser v-show="isModalVisible3" @close="closeModal3"/>
@@ -86,7 +87,7 @@
               </select>
               <h6 id="count" v-if="newSize">From 1 to {{ newSize }}</h6>
               <h6 id="count" v-else>All</h6>
-              <i class="fas fa-arrow-right" id="arrow"></i>
+              <font-awesome-icon :icon="angleLeft"/>
             </form>
             
           </div>
@@ -109,6 +110,7 @@ import { faEye } from '@fortawesome/fontawesome-free-solid'
 import { faPencilAlt } from '@fortawesome/fontawesome-free-solid'
 import { faTrashAlt } from '@fortawesome/fontawesome-free-solid'
 import { faSearch } from '@fortawesome/fontawesome-free-solid'
+import { faAngleLeft } from '@fortawesome/fontawesome-free-solid'
 import AddUser from '@/components/AddUser'
 import ViewUser from '@/components/ViewUser'
 import EditUser from '@/components/EditUser'
@@ -158,6 +160,9 @@ export default {
     },
     search () {
       return faSearch
+    },
+    angleLeft () {
+      return faAngleLeft
     }
   },
   methods: {
