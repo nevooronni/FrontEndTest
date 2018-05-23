@@ -8,8 +8,7 @@
           </div>
           <div class="col-md-6">
       
-            <b-btn id="button" class="btn"  @click="showModal">ADD USER</b-btn>
-            <AddUser v-show="isModalVisible" @close="closeModal"/>
+           
           </div>
         </div>
       </div>
@@ -22,6 +21,7 @@
               <input class="form-control mr-sm-2" type="search" placeholder="Search..." aria-label="Search" id="search">
               <font-awesome-icon :icon="search" id="searchbutton"/>
             </form>
+
             <table class="table table-striped">
               <thead id="tableHead">
                 <tr id="tableRow">
@@ -33,7 +33,7 @@
               </thead>
               <tbody>
                 
-                <tr v-for="user in Users" :key="user.id">
+                <tr v-for="user in Users.slice(0,newSize)" :key="user.id">
                  
                     <td id="fullname">{{ user.attributes.first_name }} {{ user.attributes.last_name }}</td>
                     <td id="email">{{ user.attributes.email }}</td>
@@ -50,13 +50,6 @@
               
             </table>
             
-            
-
-            <!--edit user modal-->
-            <EditUser v-show="isModalVisible3" @close="closeModal3"/>
-
-            <!--delete user modal-->
-            <DelUser v-show="isModalVisible4" @close="closeModal4"/>
           </div>
           <div class="card-footer text-muted" id="cardFooter">
             <nav aria-label="Page navigation example">
@@ -95,7 +88,9 @@
       </div>
     </div>
     
-      
+  <h6>Default</h6>
+    <b-pagination size="md" :total-rows="100" v-model="currentPage" :per-page=newSize hide-ellipsis hide-goto-end-buttons @click="input(currentPage)">
+    </b-pagination>
   </div>
 </template>
 
@@ -115,8 +110,8 @@ import AddUser from '@/components/AddUser'
 import ViewUser from '@/components/ViewUser'
 import EditUser from '@/components/EditUser'
 import DelUser from '@/components/DelUser'
-
-Vue.use(VuePaginate)
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 export default {
   name: 'HelloWorld',
@@ -129,13 +124,12 @@ export default {
   },
   data() {
     return {
+      currentPage: 3,
       isModalVisible: false,
       isModalVisible2: false,
       isModalVisible3: false,
       isModalVisible4: false,
-      newSize: '',
-      paginate: ['usersdata'],
-      langs: ['JavaScript', 'PHP', 'HTML', 'CSS', 'Ruby', 'Python', 'Erlang'] 
+      newSize: 10
     }
   },
   mounted() {
