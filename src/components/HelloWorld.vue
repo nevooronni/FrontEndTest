@@ -31,10 +31,9 @@
                   <th class="th">Status</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody v-if="Users">
                 
                 <tr v-for="user in Users.slice(0,newSize)" :key="user.id">
-                 
                     <td id="fullname">{{ user.attributes.first_name }} {{ user.attributes.last_name }}</td>
                     <td id="email">{{ user.attributes.email }}</td>
                     <td id="mobile">{{ user.attributes.mobile_number }}</td>
@@ -89,8 +88,11 @@
     </div>
     
   <h6>Default</h6>
-    <b-pagination size="md" :total-rows="100" v-model="currentPage" :per-page=newSize hide-ellipsis hide-goto-end-buttons @click="input(currentPage)">
+  <p>currentPage: {{currentPage}}</p>
+  <p>size: {{ newSize }}</p>
+    <b-pagination v-on:input="input" size="md" :total-rows="100" v-model=currentPage :per-page=parseInt(newSize) hide-ellipsis hide-goto-end-button>
     </b-pagination>
+
   </div>
 </template>
 
@@ -98,7 +100,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import fontawesome from '@fortawesome/fontawesome'
-import { mapState, mapGetters, mapMutations } from 'vuex'
+import { mapState, mapGetters, mapMutations, mapActions } from 'vuex'
 import VuePaginate from 'vue-paginate'
 import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
 import { faEye } from '@fortawesome/fontawesome-free-solid'
@@ -124,16 +126,13 @@ export default {
   },
   data() {
     return {
-      currentPage: 3,
+      currentPage: 1,
       isModalVisible: false,
       isModalVisible2: false,
       isModalVisible3: false,
       isModalVisible4: false,
       newSize: 10
     }
-  },
-  mounted() {
-    this.$store.dispatch('loadUsers')
   },
   computed: {
     ...mapState([
@@ -161,7 +160,10 @@ export default {
   },
   methods: {
     ...mapMutations([
-      'ADD_SIZE'
+      'GET_USERS'
+    ]),
+    ...mapActions([
+      'loadUsers'
     ]),
     addSize () {
       this.ADD_SIZE(this.newSize)
@@ -190,6 +192,9 @@ export default {
     },
     closeModal4 () {
       this.isModalVisible4 = false
+    },
+    input () {
+      this.loadUsers()
     }
   }
 }
