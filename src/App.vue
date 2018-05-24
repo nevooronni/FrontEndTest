@@ -25,7 +25,6 @@
         </span>
       </div>
     </nav>
-  
     <router-view/>
     
   </div>

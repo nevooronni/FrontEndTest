@@ -1,98 +1,87 @@
 <template>
-  <div class="container-fluid" id="containerFluid">
+  <div class="app" id="containerFluid">
     <div class="row" id="addUsers">
-      <div class="col-md-12">
+      <div class="col-md-12 col-sm-12 col-xs-12" >
         <div class="row">
-          <div class="col-md-6">
+
+          <div class="col-md-6 col-sm-12 col-xs-12">
             <h3 id="users">Users</h3>
           </div>
-          <div class="col-md-6">
-      
-           
+
+          <div class="col-md-6 col-sm-12 col-xs-12">
+            <b-btn id="button" class="btn"  @click="showModal">ADD USER</b-btn>
+            <AddUser v-show="isModalVisible" @close="closeModal"/>
           </div>
         </div>
       </div>
     </div>
-    <div class="row">
-      <div class="container" id="container">
-        <div class="card text-center" id="card">
-          <div class="card-body">
-            <form class="form-inline my-2 my-lg-0" id="form">
-              <input class="form-control mr-sm-2" type="search" placeholder="Search..." aria-label="Search" id="search">
-              <font-awesome-icon :icon="search" id="searchbutton"/>
-            </form>
+    <div class="row" id="tabletable">
 
-            <table class="table table-striped">
-              <thead id="tableHead">
-                <tr id="tableRow">
-                  <th class="th">Full name</th>
-                  <th class="th" >Email address</th>
-                  <th class="th">Phone number</th>
-                  <th class="th">Status</th>
-                </tr>
-              </thead>
-              <tbody v-if="Users">
+
+      <div class="card text-center w-100" id="card">
+        <div class="card-body">
+          <form class="form-inline my-2 my-lg-0" id="form">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search..." aria-label="Search" id="search">
+            <font-awesome-icon :icon="search" id="searchbutton"/>
+          </form>
+
+          <div class="table-responsive">
+          <table class="table table-striped">
+            <thead id="tableHead">
+              <tr id="tableRow">
+                <th class="th">Full name</th>
+                <th class="th" >Email address</th>
+                <th class="th">Phone number</th>
+                <th class="th">Status</th>
+              </tr>
+            </thead>
+            <tbody v-if="Users">
                 
-                <tr v-for="user in Users.slice(0,newSize)" :key="user.id">
-                    <td id="fullname">{{ user.attributes.first_name }} {{ user.attributes.last_name }}</td>
-                    <td id="email">{{ user.attributes.email }}</td>
-                    <td id="mobile">{{ user.attributes.mobile_number }}</td>
-                    <td id="status">{{ status }}</td>
-                    <td class="icon"><font-awesome-icon :icon="eye"  @click="showModal2"/></td>
-                    <!--view user modal-->
-                    <ViewUser v-show="isModalVisible2" @close="closeModal2"/>     
-                    <td class="icon"><font-awesome-icon :icon="edit" @click="showModal3"/></td>
-                    <td class="icon"><font-awesome-icon :icon="del" @click="showModal4"/></td>
-                </tr>
+              <tr v-for="user in Users.slice(0,newSize)" :key="user.id">
+                <td id="fullname">{{ user.attributes.first_name }} {{ user.attributes.last_name }}</td>
+                <td id="email">{{ user.attributes.email }}</td>
+                <td id="mobile">{{ user.attributes.mobile_number }}</td>
+                <td id="status">{{ status }}</td>
+                <td class="icon"><font-awesome-icon :icon="eye"  @click="showModal2"/></td>
+
+                <!--view user modal-->
+                <ViewUser v-show="isModalVisible2" @close="closeModal2"/>     
+                <td class="icon"><font-awesome-icon :icon="edit" @click="showModal3"/></td>
+                <td class="icon"><font-awesome-icon :icon="del" @click="showModal4"/></td>
+              </tr>
                 
-              </tbody>
+            </tbody>
               
-            </table>
-            
+          </table>
           </div>
-          <div class="card-footer text-muted" id="cardFooter">
-            <nav aria-label="Page navigation example">
-              <ul class="pagination">
-                <li class="page-item">
-                  <a class="page-link" href="#" aria-label="Previous">
-                    <span aria-hidden="true">&laquo;</span>
-                    <span class="sr-only">Previous</span>
-                  </a>
-                </li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item"><a class="page-link" href="#">4</a></li>
-                <li class="page-item">
-                  <a class="page-link" href="#" aria-label="Next">
-                    <span aria-hidden="true">&raquo;</span>
-                    <span class="sr-only">Next</span>
-                  </a>
-                </li>
-              </ul>
-            </nav>
-            <form  @submit="addSize()" id="rowform">
-              <label for="inputRow" id="label">Row per page</label>
-              <select  class="form-control form-control-sm" id="inputRow" v-model="newSize">
-                <option>10</option>
-                <option>20</option>
-              </select>
-              <h6 id="count" v-if="newSize">From 1 to {{ newSize }}</h6>
-              <h6 id="count" v-else>All</h6>
-              <font-awesome-icon :icon="angleLeft"/>
-            </form>
             
-          </div>
+        </div>
+        <div class="card-footer text-muted" id="cardFooter">
+          <b-pagination v-on:input="input" size="md" :total-rows="100" v-model=currentPage :per-page=parseInt(newSize) hide-ellipsis hide-goto-end-buttons>
+          </b-pagination>
+
+          <form  @submit="addSize()" id="rowform">
+            <label for="inputRow" id="label">Row per page</label>
+            <select  class="form-control form-control-sm" id="inputRow" v-model="newSize">
+              <option>10</option>
+              <option>20</option>
+            </select>
+            <h6 id="count" v-if="newSize">From 1 to {{ newSize }}</h6>
+            <h6 id="count" v-else>All</h6>
+            <font-awesome-icon :icon="angleLeft"/>
+          </form>
+            
         </div>
       </div>
+
+
+      
     </div>
     
-  <h6>Default</h6>
+  <!-- <h6>Default</h6>
   <p>currentPage: {{currentPage}}</p>
-  <p>size: {{ newSize }}</p>
-    <b-pagination v-on:input="input" size="md" :total-rows="100" v-model=currentPage :per-page=parseInt(newSize) hide-ellipsis hide-goto-end-button>
-    </b-pagination>
-
+  <p>size: {{ newSize }}</p> -->
+    
   </div>
 </template>
 
@@ -177,6 +166,7 @@ export default {
     },
     showModal2 () {
       this.isModalVisible2 = true
+
     },
     closeModal2 () {
       this.isModalVisible2 = false
@@ -209,7 +199,6 @@ export default {
   margin-top: 90px;
   margin-left: 0px;
   margin-right: 0px;
-  width: 1442px;
 }
 
 .th {
@@ -240,12 +229,23 @@ export default {
 }
 #containerFluid {
   background-color: #F7F7F7;
+  height: auto;
+  width: auto;
 }
 
 #addUsers {
   padding-top: 40px;
   padding-left: 30px;
   padding-right: 30px;
+  margin-right: 0px;
+  margin-left: 0px;
+}
+
+#tabletable {
+  margin-right: 0px;
+  margin-left: 0px;  
+  padding-right: 42px;
+  padding-left: 42px;
 }
 
 #users {
@@ -254,22 +254,21 @@ export default {
 
 #form {
   float: right;
+  margin-right: 16px;
 }
 
 #card {
-  width: 1442px;
-}
-
-#container {
   padding-left: 0px;
   margin-top: 25px;
-  margin-left: 47px;
+  margin-left: 0px;
+  padding-right: 0px;
   margin-bottom: 60px;
 }
 
 .card-body {
   padding-top: 25px;
   padding-left: 0px;
+  padding-right: 0px;
 }
 
 #cardFooter {
